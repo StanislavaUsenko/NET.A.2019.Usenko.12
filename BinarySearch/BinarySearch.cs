@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace BinarySearch
 {
-    public class BinarySearchExtention<T>
-    { 
-        public int Search(this T[] array, T searchedValue)
+    public static class BinarySearch
+    {
+        public static int Search<T>(this T[] array, T searchedValue)
         {
             IComparer<T> comparer;
             if (array == null || searchedValue == null)
             {
                 throw new ArgumentNullException();
             }
+
             if (searchedValue is IComparable)
             {
                 comparer = Comparer<T>.Default;
@@ -29,7 +30,7 @@ namespace BinarySearch
             while (left <= right)
             {
                 var middle = (left + right) / 2;
-                int compare =  comparer.Compare(array[middle], searchedValue);
+                int compare = comparer.Compare(array[middle], searchedValue);
 
                 if (compare == 0)
                 {
@@ -44,6 +45,7 @@ namespace BinarySearch
                     left = middle + 1;
                 }
             }
+
             return -1;
         }
     }
